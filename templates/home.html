@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <title>Jonathan</title>
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='avatar.png') }}"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+      body {
+      }
+      h1 {
+        display: inline-flex;
+        font-size: 3em;
+        margin: 0;
+        padding: 15px;
+        font-family: monospace;
+      }
+      h3 {
+        color: black;
+        font-size: 20px;
+        margin-top: 3px;
+        text-align: center;
+      }
+      #chatbox {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        margin-top: 60px;
+        font-family: monospace;
+      }
+      #userInput {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        margin-top: 60px;
+        display: flex;
+        font-family: monospace;
+      }
+      #reportInput {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        margin-top: 60px;
+        display: flex;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        align-items: center;
+       }
+      #textInput {
+        width: 90%;
+        border: none;
+        border-bottom: 1px solid black;
+        font-family: monospace;
+        font-size: 17px;
+      }
+      .userText {
+        color: white;
+        font-family: monospace;
+        font-size: 17px;
+        text-align: right;
+        line-height: 30px;
+      }
+      .userText span {
+        background-color: #808080;
+        padding: 10px;
+        border-radius: 2px;
+      }
+      .botText {
+        color: white;
+        font-family: monospace;
+        font-size: 17px;
+        text-align: left;
+        line-height: 30px;
+      }
+      .botText span {
+        background-color: #4169e1;
+        padding: 10px;
+        border-radius: 2px;
+      }
+      #sendButton, #reportButton {
+        background-color: #4169e1;
+        font-size: 18px;
+        font-family: monospace;
+        color: white;
+        margin-left: 10px;
+        height: 30px;
+        width: 10%;
+      }
+      #reportLabel {
+        align-self: center;
+        margin-left: auto;
+        color: White;
+        margin-bottom: 30px;
+      }
+      #reportButton {
+        margin-right: auto;
+        margin-bottom: 30px;
+      }
+      #tidbit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+      }
+      .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        margin-top: 40px;
+        padding-top:5px;
+        padding-bottom: 50px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color:white;
+      }
+      .box {
+        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3), 0 10px 30px 0 rgba(0, 0, 0, 0.3);
+      }
+      #chabotAvatar {
+        margin-right: 15px;
+        border-radius: 50%;
+        align-self: center;
+      }
+      .userTimestamp {
+        margin-top: -10px;
+        font-size: 8px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-align: right;
+      }
+      .botTimestamp {
+        margin-top: -10px;
+        font-size: 8px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      #logoutButton {
+        margin-left: auto;
+        height: 20px;
+        align-self: center;
+        background-color: #4169e1;
+        font-size: 16px;
+        font-family: monospace;
+        color: White;
+        text-decoration: none;
+        padding: 5px;
+        text-align: center;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body style="background-color:#6f8fed;">
+    <div style="color:#4169e1;">
+      <div style="background-color:white; display: flex; justify-content:center; padding-left:10px; padding-right:10px;">
+      <h1 style="margin-left:auto;">
+        <img
+          id="chabotAvatar"
+          src=" {{ url_for('static', filename='avatar.png') }}"
+          alt="Jonathan"
+          style="width:50px;height:50px;"
+        />Jonathan
+      </h1>
+      <a href="/logout" class="btn btn-primary" id="logoutButton">Logout</a>
+      </div>
+    </div>
+    <div class="box"></div>
+      <div class="boxed" >
+        <div id="chatbox">
+          <img
+            src=" {{ url_for('static', filename='avatar.png') }}"
+            alt="Ryan"
+            style="width:40px;height:40px;border-radius:50%"
+          />
+          <p class="botText">
+            <span>Hi {{name}}, I am Jonathan your personal chatbot! 😊</span>
+          </p>
+          <p class="botText">
+            <span>Here's what I can help you with: </span>
+          </p>
+          <p class="botText">
+            <span>Book meeting rooms, check available meeting rooms, book front desk appointment & log facilities faults.</span>
+          </p>
+          <p class="botText">
+            <span>Help you with Buy & Claim requests, upload receipts, gift valuation, Purchase requests, Disposal of Equipment requests & check announcements for ongoing works.</span>
+          </p>
+        </div>
+        <div id="userInput">
+          <input id="textInput" type="text" name="msg" placeholder="Message" />
+          <Button class="btn btn-primary" id="sendButton" type="submit" value="Send">Send</Button>
+        </div>
+      </div>
+      <div id="reportInput">
+        <label for="reportButton" id="reportLabel">If you think that the last sent message has been incorrectly answered, simply report it:</label>
+        <Button class="btn btn-primary" id="reportButton" type="submit" value="Send">Report</Button>
+      </div>
+      <script>
+        function getBotResponse() {
+          var dt = new Date();
+          var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText + "</span></p>" + '<p class="userTimestamp"><span>'+ time + '</span></p>';
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document
+            .getElementById("userInput")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+          $.get("/get", { msg: rawText }).done(function(data) {
+            var dt = new Date();
+            var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+            var botHtml = '<p class="botText"><span>' + data + "</span></p>" + '<p class="botTimestamp"><span>'+ time + '</span></p>';
+            $("#chatbox").append(botHtml);
+            $("#reportButton").prop('disabled', false);
+            document
+              .getElementById("userInput")
+              .scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        }
+
+        function reportResponse(name) {
+          $.get("/report-input").done(function(data) {
+            if (data == 'is Existing Input') {
+              var botHtml = '<p class="botText"><span>Thank you for reporting my wrong response! It will help me improve in the future. 😊</span></p>';
+              $("#chatbox").append(botHtml);
+              document
+                .getElementById("userInput")
+                .scrollIntoView({ block: "start", behavior: "smooth" });
+            } else {
+              var botHtml = '<p class="botText"><span>Oops the report did not go through. 😧</span></p>';
+              $("#chatbox").append(botHtml);
+              document
+                .getElementById("userInput")
+                .scrollIntoView({ block: "start", behavior: "smooth" });
+            }
+            });
+        }
+
+        $(document).ready(function() {
+          if ( $( ".userText" ).length ) {
+            $("#reportButton").prop('disabled', false);
+          } else {
+            $("#reportButton").prop('disabled', true);
+          }
+        });
+
+        $("#textInput").keypress(function(e) {
+          if (e.which == 13) {
+            getBotResponse();
+          }
+        });
+        $( "#sendButton" ).click(function() {
+          getBotResponse();
+        });
+        $("#reportButton").click(function() {
+          reportResponse();
+        })
+
+      </script>
+    </div>
+  </body>
+</html>

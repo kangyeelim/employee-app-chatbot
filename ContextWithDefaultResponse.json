@@ -1,0 +1,169 @@
+{"responses": [
+    {
+        "tag": "general.greeting",
+        "responses": ["Hello, thanks for visiting. How can I help?", "Good to see you again, how can I assist you?", "Hi there, how can I help?"]
+    },
+    {
+        "tag": "general.assist",
+         "responses":["I am ready to help! What do you need?", "How can I assist you?", "How would you like me to assist you?"]
+        },
+        {"tag": "general.goodbye",
+         "responses": ["See you later, thanks for visiting", "Have a nice day", "Bye! Come back again soon."]
+        },
+        {"tag": "general.thanks",
+         "responses": ["Happy to help!", "Any time!", "My pleasure"]
+        },
+        {
+            "tag": "smalltalk.acquaintance",
+            "responses": ["I'm Jonathan! I was created by some interns to be helpful to you and make your job easier. I will try my best to help you but forgive me if I make a mistake because I'm still learning."]
+
+        },
+        {
+            "tag": "smalltalk.residence",
+            "responses": ["Somewhere over the rainbow", "Somewhere where blue birds fly", "In your heart"]
+        },
+        {
+          "tag": "smalltalk.real",
+          "responses": ["I am real but not perfect. Just give me a task to help you with.", "I am real, genuine and sincere. I will help you if I can!", "I am real and serve with sincerity, just give me a task!"]
+        },
+        {
+          "tag": "smalltalk.chatbot",
+          "responses": ["I'm a chatbot but I want to be like a human one day.", "I'm just a chatbot but I want to be smart like you humans", "I am chatbot but just treat me like a human!"]
+        },
+        {
+            "tag": "smalltalk.lunch",
+            "responses": ["There's the reading cafe at level 2 and the canteen at level 1 of Annex! If you have more time, you can checkout the neighbourhood coffee shops across the blk 1 bus stop or Vivocity that is a few bus stops away.", "Canteen at level 1 or reading cafe at level 2 of Annex! You can also explore the neighbourhood coffee shops around or Vivocity/Safra nearby!"]
+        },
+        {
+          "tag": "smalltalk.encouragement",
+          "responses": ["Keep up the good work!", "You can do it!", "Take a small break before continuing", "I believe you can do it!"]
+        },
+        {"tag": "faq.concierge_service_hours",
+         "responses": ["The conceirge front desk is open every weekday, 9am-5pm. Lunch hours are 12pm-1.30pm. No walk ins are allowed as a part of Covid-19 precautionary measures, would you like to book a time slot to visit?", "Concierge front desk hours are 9am-9pm, Mon-Fri. Lunch hours are 12pm-1.30pm. No walk ins are allowed as a part of Covid-19 precautionary measures, would you like to book a time slot to visit?"],
+         "context_set": "context.book_concierge_time.yes_or_no"
+        },
+        {
+            "tag": "general.consent",
+            "responses": ["For booking a time slot to visit the concierge front desk, please go to this link: www.oneemployee.com/bookconciergevisit/ or I can help you to book, just tell me the time and date."],
+            "context_filter": "context.book_concierge_time.yes_or_no",
+            "context_set": "context.book_concierge_time"
+        },
+        {
+            "tag": "general.consent",
+            "responses": [""],
+            "context_filter": "context.book_concierge_time.confirm_or_not"
+
+        },
+        {
+            "tag": "general.rejection",
+            "responses": ["Alright, anything else I can help you with?", "Anything else I can assist you with?", "How else can I help you?"],
+            "context_filter": "context.book_concierge_time.confirm_or_not"
+        },
+        {"tag": "task.book_concierge_time",
+         "responses": ["For booking a time slot to visit the concierge front desk, please go to this link: www.oneemployee.com/bookconciergevisit/ or I can help you to book, just tell me the time and date."],
+         "context_set": "context.book_concierge_time"
+        },
+        {"tag": "faq.available_meeting_room",
+         "responses": ["Give me a moment to check for available meeting rooms for booking. Is there a meeting room you would like to book?"],
+         "context_set": "context.book_meeting_room.yes_or_no"
+        },
+        {
+            "tag": "general.consent",
+            "responses": ["For booking a meeting room, please go to this link to find the available meeting rooms and to input the booking details: www.oneemployee.com/bookmeetingroom/ or I can help you, just tell me the meeting room unit number, time and date."],
+            "context_filter": "context.book_meeting_room.yes_or_no",
+            "context_set": "context.book_meeting_room"
+        },
+        {
+            "tag": "general.consent",
+            "responses": [""],
+            "context_filter": "context.book_meeting_room.confirm_or_not"
+        },
+        {
+            "tag": "general.rejection",
+            "responses": ["Alright, anything else I can help you with?", "Anything else I can assist you with?", "How else can I help you?"],
+            "context_filter": "context.book_meeting_room.confirm_or_not"
+        },
+        {"tag": "task.book_meeting_room",
+         "responses": ["For booking a meeting room, please go to this link to find the available meeting rooms and to input the booking details: www.oneemployee.com/bookmeetingroom/ or I can help you, just tell me the meeting room unit number, time and date."],
+         "context_set": "context.book_meeting_room"
+
+        },
+        {
+            "tag": "task.raise_AOR",
+            "responses": ["To raise AOR, please visit this link: www.oneemployee.com/raiseaor/"]
+        },
+        {
+            "tag": "faq.what_is_AOR",
+            "responses": ["AOR stands for ... Would you like to raise an AOR?"],
+            "context_set": "context.raise_AOR.yes_or_no"
+        },
+        {
+            "tag": "general.consent",
+            "responses": ["To raise AOR, please visit this link: www.oneemployee.com/raiseaor/"],
+            "context_filter": "context.raise_AOR.yes_or_no"
+        },
+        {
+            "tag": "general.rejection",
+            "responses": ["Alright, anything else I can help you with?", "Anything else I can assist you with?", "How else can I help you?"],
+            "context_filter": "context.raise_AOR.yes_or_no"
+        },
+        {
+            "tag": "task.submit_buy_claim",
+            "responses": ["To submit a buy and claim request, head over to www.oneemployee.com/buyandclaimrequests/", "To submit a buy and claim request, please visit this link: www.oneemployee.com/buyandclaimrequests/"]
+        },
+        {
+            "tag": "faq.what_is_buy_claim",
+            "responses": ["A buy and claim request is ... Would you like to make a buy and claim request?"],
+            "context_set": "context.buy_and_claim_request.yes_or_no"
+        },
+        {
+            "tag": "general.consent",
+            "responses": ["To submit a buy and claim request, head over to www.oneemployee.com/buyandclaimrequests/", "To submit a buy and claim request, please visit this link: www.oneemployee.com/buyandclaimrequests/"],
+            "context_filter": "context.buy_and_claim_request.yes_or_no"
+        },
+        {
+            "tag": "general.rejection",
+            "responses": ["Alright, anything else I can help you with?", "Anything else I can assist you with?", "How else can I help you?"],
+            "context_filter": "context.buy_and_claim_request.yes_or_no"
+        },
+        {
+            "tag": "task.upload_receipts",
+            "responses": ["To submit upload your receipts, head over to www.oneemployee.com/uploadreceipts/"]
+        },
+        {
+            "tag": "task.gift_valuation",
+            "responses": ["To do a gift valuation, just visit www.oneemployee.com/giftvalue/"]
+        },
+        {
+             "tag": "task.log_facilities_fault",
+             "responses": ["Oh no! I will convey this to the facilities management department to get the problem fixed. Is this urgent?", "Don't fret, I will inform the facilities management department to look into it. Do you need them to look into it immediately?", "Got it, I shall inform the facilities management department straightaway for them to put things in order! Do you need it to be done immediately?"],
+             "context_set": "context.facilities_fault.urgent_or_not"
+        },
+        {
+            "tag": "general.consent",
+            "responses": ["Since it is urgent, please call 61234567 to get in touch with the facilities management department.", "Do call 61234567 to get in contact with the facilties management department if you want them to look into the matter immediately."],
+            "context_filter": "context.facilities_fault.urgent_or_not"
+        },
+        {
+            "tag": "general.rejection",
+            "responses": ["Alright, anything else I can help you with?", "Anything else I can assist you with?", "How else can I help you?"],
+            "context_filter": "context.facilities_fault.urgent_or_not"
+        },
+        {
+          "tag": "task.fix_facilities_fault",
+          "responses": ["Oh no! I will log this fault for the facilities department but if this is urgent and needs to be looked into immediately, please call 61234567.", "I have logged this fault for the faciltieis management department to look into, but if you need them to help you immediately, please call 61234567."]
+        },
+        {
+            "tag": "faq.ongoing_works_in_facilities",
+            "responses": ["Give me a moment to check for any announcements.", "Let me check for you!", "Checking... Give me a moment."]
+        },
+        {
+            "tag": "task.submit_purchase_request",
+            "responses": ["To submit a purchase request, just go to www.oneemployee.com/purchaserequest/"]
+        },
+        {
+            "tag": "task.submit_disposal_equipment_request",
+            "responses": ["To submit a request for disposal of equipment, just visit this link: www.oneemployee.com/disposalequipmentrequest/"]
+        }
+    ]
+}

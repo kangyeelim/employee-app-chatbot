@@ -1,0 +1,113 @@
+{% extends "adminHeader.html" %}
+{% set active_page = "tags" %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<main>
+<div class="container my-5">
+  <div class="card-body text-center">
+    <h4 class="card-title">Tags</h4>
+    <p class="card-text">Add or delete tags for training. If a user input is tagged to the deleted tag, the input will be untagged. Deleted tag and corresponding tagged inputs will be removed from training set permanently.</p>
+    <p><b>ADD ONLY INTENT TAGS.</b></p>
+  </div>
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  <div style="display: flex;justify-content: center; margin-top:20px; margin-bottom:20px">
+  <div class="card">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Tag</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="filtered-users-table-body">
+            <tr>
+              <th scope="row">1</th>
+              <td>context</td>
+              <td>
+                No Actions Allowed
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>sentiment.emoji</td>
+              <td>
+                No Actions Allowed
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>smalltalk.dialogpt</td>
+              <td>
+                No Actions Allowed
+              </td>
+            </tr>
+            {% for i, tag in tags %}
+              {% if not tag.tag == 'context' and not tag.tag == 'sentiment.emoji' and not tag.tag == 'smalltalk.dialogpt' %}
+              <tr name="{{ tag._id }}" id="{{ tag._id }}">
+                <th scope="row">{{ i + 4 }}</th>
+                <td>{{ tag.tag }}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-primary editButton" value="{{ tag._id }}"><i class="fas fa-edit" style="margin-right:5px;"></i>Edit Tag</button>
+                    <a class="btn btn-sm btn-danger" href="{{ url_for('delete_a_tag', id=tag._id) }}"><i class="fas fa-trash-alt"></i> Delete Tag</a>
+                </td>
+                <td id="{{ tag._id }}EditForm" style="display:none;">
+                  <form action="/edit-tag" method="POST">
+                      <label for="newTagName" class="form-label" >New Tag Name:</label>
+                      <input style="display: none;" value="{{ tag._id }}" name="id" id="id">
+                      <input type="text" class="form-control" id="newTagName" name="newTagName">
+                      <button type="submit" name="formButton" class="btn btn-sm btn-primary" style="background-color:#4169e1; margin-top:10px;" value="submit">Submit</button>
+                  </form>
+                  <button class="btn btn-sm btn-warning cancelEditTagButton" name="formButton" value="{{ tag._id }}" style="float:right;margin-top:-31px;">Cancel</button>
+                </td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+          </tbody>
+        </table>
+      <form action="/tags" method="POST" id="form">
+      <div class="mb-3" style="padding:20px;">
+        <label for="tagInput" class="form-label">Add Tag:</label>
+        <input type="text" class="form-control" id="tagInput" name="tagInput">
+      </div>
+      <div style="display: flex;justify-content: center; margin-top:20px; margin-bottom:20px">
+      <button type="submit" class="btn btn-primary" style="background-color:#4169e1;">Submit</button>
+      </div>
+      </form>
+  </div>
+  </div>
+</div>
+</main>
+{% endblock %}
+{% block footer %}
+<script>
+    function getEditTagForm(id) {
+      var tdId = id + "EditForm"
+      document.getElementById(tdId).style.display = "block";
+    }
+
+    function closeEditTagForm(id) {
+      var tdId = id + "EditForm"
+      document.getElementById(tdId).style.display = "none";
+    }
+
+    document.getElementById('{{ scrollTo }}').scrollIntoView();
+    $(".editButton").click(function() {
+      var id = $(this).attr('value');
+      getEditTagForm(id);
+    });
+    $('.cancelEditTagButton').click(function() {
+      var id = $(this).attr("value");
+      closeEditTagForm(id);
+    })
+
+</script>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "adminHeader.html" %}
+{% set active_page = "home" %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <main>
+  <div class="container my-5">
+         <div class="card-body text-center">
+      <h4 class="card-title">Users</h4>
+      <p class="card-text">All users that have interacted with Jonathan since the last re-training.</p>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="background-opacity:0;">
+      <form action="/retrain" method="POST" id="form">
+      {% if need_retraining %}
+      <div id="training-button" style="display:flex;">
+      <p style="align-self:center; margin-right:10px; color:Red;"><b>Tags have been added/changed since last training:</b></p>
+        <Button type="submit" class="btn btn-info" style="margin-bottom:20px; align-self:center;" id="train-button">Re-train</Button>
+      </div>
+      <div id="loading" style="display:none;">
+        <button class="btn btn-info" type="button" disabled style="margin-bottom:20px; align-self:center;">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Re-training...
+        </button>
+      </div>
+      {% else %}
+        <Button class="btn btn-info" style="margin-bottom:20px;">No need retraining</Button>
+      {% endif %}
+      </form>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="background-opacity:0;">
+      <form action="/dashboard" method="POST" id="form">
+        <input type="hidden" name="isFiltered" value="{{ isFiltered }}" />
+        {% if isFiltered %}
+          <button id="filter-users" type="submit" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg"><div id="status-users">Show All</div></button>
+        {% else %}
+          <button id="filter-users" type="submit" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg"><div id="status-users">Show tagging required only</div></button>
+        {% endif %}
+      </form>
+    </div>
+      <div class="card">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">User Name</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                  <th scope="col">User info</th>
+                </tr>
+              </thead>
+              {% if isFiltered %}
+              <tbody class="filtered-users-table-body">
+                {% for i, user in filtered_users %}
+                  <tr>
+                    <th scope="row">{{ i + 1}}</th>
+                    <td>{{ user["username"] }}</td>
+                    {% if user["needsTagging"] %}
+                      <td><span style="color: Red;"><i class="fas fa-exclamation-triangle"></i></span> Needs Tagging</td>
+                    {% else %}
+                      <td><span style="color: Green;"><i class="far fa-check-circle"></i></span> All Tagged</td>
+                    {% endif %}
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{{ url_for('tag_conversation_past_month', userID=user['_id']) }}"><i class="fas fa-tags"></i> Tag Inputs</a>
+                        <a class="btn btn-sm btn-danger" href="{{ url_for('delete_log', userID=user['_id']) }}"><i class="fas fa-trash-alt"></i> Delete log</a>
+                    </td>
+                    <td><a class="btn btn-sm btn-secondary" href="{{ url_for('user_info', userID=user['_id']) }}"><i class="fas fa-info-circle"></i> Details</a> </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+              {% else %}
+              <tbody class="users-table-body">
+                {% for i, user in users %}
+                  <tr>
+                    <th scope="row">{{ i + 1}}</th>
+                    <td>{{ user["username"] }}</td>
+                    {% if user["needsTagging"] %}
+                      <td><span style="color: Red;"><i class="fas fa-exclamation-triangle"></i></span> Needs Tagging</td>
+                    {% else %}
+                      <td><span style="color: Green;"><i class="far fa-check-circle"></i></span> All Tagged</td>
+                    {% endif %}
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{{ url_for('tag_conversation_past_month', userID=user['_id']) }}"><i class="fas fa-tags"></i> Tag Inputs</a>
+                        <a class="btn btn-sm btn-danger" href="{{ url_for('delete_log', userID=user['_id']) }}"><i class="fas fa-trash-alt"></i> Delete log</a>
+                    </td>
+                    <td><a class="btn btn-sm btn-secondary" href="{{ url_for('user_info', userID=user['_id']) }}"><i class="fas fa-info-circle"></i> Details</a> </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+              {% endif %}
+            </table>
+      </div>
+      </div>
+    </main>
+  {% endblock %}
+  {% block footer %}
+  <script type="text/javascript">
+      function loader(){
+          document.getElementById("loading").style.display = "block";
+          document.getElementById("training-button").style.display = "none";
+      }
+      $( "#train-button" ).click(function() {
+        loader();
+      });
+  </script>
+  {% endblock %}

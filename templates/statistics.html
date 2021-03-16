@@ -1,0 +1,66 @@
+{% extends "adminHeader.html" %}
+{% set active_page = "performance" %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+<main id="main">
+  <div class="container my-5">
+    <div class="card-body text-center">
+      <h4 class="card-title">Performance & training</h4>
+      <p class="card-text">These are the statistics for the performance of Jonathan, the Chatbot and settings for it.</p>
+    </div>
+    <div class="card-body text-center" id="statistics-card">
+		<div class="row">
+		  <div class="col col-md-6">
+				<h5>Overall Statistics</h5>
+				Percentage correct:<span class="pull-right strong"><b> {{ percentage_correct_all }}%</b></span>
+				<div class="progress" style="margin-bottom:30px;">
+					<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ percentage_correct_all }}"aria-valuemin="0" aria-valuemax="100" style="width: {{ percentage_correct_all }}%">{{ percentage_correct_all }}%</div>
+			  </div>
+        Percentage correct since last training:<span class="pull-right strong"><b> {{ percentage_correct_since_last_training }}% </b></span>
+        <div class="progress">
+          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percentage_correct_since_last_training }}"aria-valuemin="0" aria-valuemax="100" style="width:{{ percentage_correct_since_last_training }}%">{{ percentage_correct_since_last_training }}%</div>
+        </div>
+      </div>
+			<div class="col col-md-6">
+				<h5>Database Statistics</h5>
+						Percentage correct for past month:<span class="pull-right strong"><b> {{ percentage_correct_last_month }}%</b></span>
+						<div class="progress" style="margin-bottom:30px;">
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percentage_correct_last_month }}"aria-valuemin="0" aria-valuemax="100" style="width:{{ percentage_correct_last_month }}%">{{ percentage_correct_last_month }}%</div>
+						</div>
+						Percentage correct for past week:<span class="pull-right strong"><b> {{ percentage_correct_last_week }}%</b></span>
+						<div class="progress">
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percentage_correct_last_week }}"aria-valuemin="0" aria-valuemax="100" style="width:{{ percentage_correct_last_week }}%">{{ percentage_correct_last_week }}%</div>
+						</div>
+					</div>
+        </div>
+        <div class="row" style="margin-top:50px;">
+          <div class="col col-md-6">
+            <h5 >Current certainty for response</h5>
+            <p>Current certainty of intent classification prediction for response: <b>{{ error_threshold }}</b></p>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ error_threshold }}"aria-valuemin="0" aria-valuemax="1" style="width:{{ error_threshold * 100 }}%">{{ error_threshold }}</div>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <h5 >Change Certainty of response</h5>
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            <form action="/error-threshold" method="POST">
+                <label for="error_threshold" class="form-label" >New certainty for prediction of intent classification model (max: 1.0):</label>
+                <input type="text" class="form-control" id="error_threshold" name="error_threshold" style="width:30%; margin-left:auto; margin-right:auto;">
+                <button type="submit" name="formButton" class="btn btn-sm btn-primary" style="background-color:#4169e1; margin-top:10px;" value="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+			</div>
+    </div>
+</main>
+{% endblock %}

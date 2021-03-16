@@ -1,0 +1,109 @@
+{% extends "adminHeader.html" %}
+{% set active_page = "sentiment" %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<main>
+<div class="container my-5">
+  <div class="card-body text-center">
+    <h4 class="card-title">Tag sentiments for inputs</h4>
+    <p class="card-text">Logs of the inputs tagged as smalltalk or sentiment.emoji to be tagged as positive, negative or neutral sentiment. Recommended to re-train after a large quantity of inputs tagged. Showing all the logs may take some time to load.</p>
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="background-opacity:0;">
+    <form action="/retrain-sentiment" method="POST" id="form">
+    {% if need_training %}
+    <div id="training-button" style="display:flex;">
+    <p style="align-self:center; margin-right:10px; color:Red;"><b>Tags have been added/changed since last training:</b></p>
+      <Button type="submit" class="btn btn-info" style="margin-bottom:20px; align-self:center;" id="train-button">Re-train</Button>
+    </div>
+    <div id="loading" style="display:none;">
+      <button class="btn btn-info" type="button" disabled style="margin-bottom:20px; align-self:center;">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Re-training...
+      </button>
+    </div>
+    {% else %}
+      <Button class="btn btn-info" style="margin-bottom:20px;">No need retraining</Button>
+    {% endif %}
+    </form>
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="background-opacity:0;">
+    <div style="align-self:center; margin-right:20px; color:Green;">
+      Current Filter: {{ currentFilter }}
+    </div>
+  <div class="dropdown">
+    <button class="btn btn-success dropdown-toggle" type="button" id="filterButton" data-bs-toggle="dropdown" aria-expanded="false">
+      Apply Filters
+    </button>
+    <ul class="dropdown-menu" aria-labelledby=filterButton">
+      <li><a class="dropdown-item" href="{{ url_for('tag_sentiment') }}">Show All</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('tag_sentiment_past_week') }}">Past Week</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('tag_sentiment_past_month') }}">Past Month</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('tag_sentiment_past_half_year') }}">Past Half Year</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('tag_sentiment_past_year') }}">Past Year</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('tag_sentiment_untagged') }}">Untagged Only</a></li>
+    </ul>
+  </div>
+  </div>
+  <div class="card">
+    <form action="/submit-sentiment-tags" method="POST" id="form">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Sentiment</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Input</th>
+          </tr>
+        </thead>
+        <tbody class="filtered-users-table-body">
+        {% for input in log %}
+        <tr>
+            {% if input.sentiment == 1 %}
+              <td style="color:Green;">Positive</td>
+            {% elif input.sentiment == 0 %}
+              <td style="color:Red;">Negative</td>
+            {% else %}
+              <td>Neutral</td>
+            {% endif %}
+            <td>
+              <select name="{{ input._id }}" class="form-select form-select-sm" aria-label=".form-select-lg example">
+                <option selected>Choose Sentiment</option>
+                  <option>Positive</option>
+                  <option>Neutral</option>
+                  <option>Negative</option>
+              </select>
+            </td>
+            {% if input.sentiment == 1 %}
+              <td style="color:Green;">{{ input.input }}</td>
+            {% elif input.sentiment == 0 %}
+              <td style="color:Red;">{{ input.input }}</td>
+            {% else %}
+              <td>{{ input.input }}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+        {% if log_len > 0 %}
+        <div style="display: flex;justify-content: center; margin-top:20px; margin-bottom:20px">
+        <button type="submit" class="btn btn-primary" style="background-color:#4169e1;align-self:center;">Submit</button>
+        </div>
+        {% endif %}
+    </form>
+  </div>
+</div>
+</main>
+{% endblock %}
+{% block footer %}
+<script type="text/javascript">
+    function loader(){
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("training-button").style.display = "none";
+    }
+    $( "#train-button" ).click(function() {
+      loader();
+    });
+</script>
+{% endblock %}

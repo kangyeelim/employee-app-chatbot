@@ -1,0 +1,82 @@
+{% extends "adminHeader.html" %}
+{% set active_page = "home" %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<main>
+<div class="container my-5">
+  <div class="card-body text-center">
+    <h4 class="card-title">{{ username }}</h4>
+    <p class="card-text">Conversation log with the tags identitified and those that needs tagging.</p>
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="background-opacity:0;">
+    <div style="align-self:center; margin-right:20px; color:Green;">
+      Current Filter: {{ currentFilter }}
+    </div>
+  <div class="dropdown">
+    <button class="btn btn-success dropdown-toggle" type="button" id="filterButton" data-bs-toggle="dropdown" aria-expanded="false">
+      Apply Filters
+    </button>
+    <ul class="dropdown-menu" aria-labelledby=filterButton">
+      <li><a class="dropdown-item" href="{{ url_for('tag_conversation', userID=userID) }}">Show All</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('tag_conversation_past_week', userID=userID) }}">Past Week</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('tag_conversation_past_month', userID=userID) }}">Past Month</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('tag_conversation_past_year', userID=userID) }}">Past Year</a></li>
+      <li><a class="dropdown-item" href="{{ url_for('tag_conversation_untagged', userID=userID) }}">Untagged Only</a></li>
+    </ul>
+  </div>
+  </div>
+  <div class="card">
+    <form action="/submit-tags/{{ userID }}" method="POST" id="form">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Current Tag</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Input</th>
+          </tr>
+        </thead>
+        <tbody class="filtered-users-table-body">
+        {% for input in log %}
+        <tr>
+          {% if input.isIdentified %}
+            <td>{{ input.tag }}</td>
+            <td>
+              <select name="{{ input._id }}" class="form-select form-select-sm" aria-label=".form-select-lg example">
+                <option selected>Choose Tag</option>
+                {% for tag in tags %}
+                  <option>{{ tag.tag }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td>{{ input.input }}</td>
+          {% else %}
+            <td style="color:Red;">None</td>
+            <td style="color:Red;">
+              <select name="{{ input._id }}" class="form-select form-select-sm" aria-label=".form-select-lg example">
+                <option selected>Choose Tag</option>
+                {% for tag in tags %}
+                  <option>{{ tag.tag }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td style="color:Red;">
+              {{ input.input }}
+            </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+        {% if log_len > 0 %}
+        <div style="display: flex;justify-content: center; margin-top:20px; margin-bottom:20px">
+        <button type="submit" class="btn btn-primary" style="background-color:#4169e1;align-self:center;">Submit</button>
+        </div>
+        {% endif %}
+    </form>
+  </div>
+</div>
+</main>
+{% endblock %}

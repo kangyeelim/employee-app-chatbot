@@ -1,0 +1,23 @@
+{% extends "adminHeader.html" %}
+{% set active_page = "home" %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<main>
+<div class="container my-5">
+  <div class="card-body text-center">
+    <h4 class="card-title">{{ username }}</h4>
+  </div>
+  <div class="card">
+  </div>
+  <div style="display: flex;justify-content: center; margin-top:20px; margin-bottom:20px">
+  <div class="card" style="padding:30px;">
+    <p class="card-text">Total Number of Messages in Database: {{ log_len }}</p>
+    <p class="card-text">Untagged Number of Messages in Database: {{ unidentified_log_len }}</p>
+  </div>
+  </div>
+</div>
+</main>
+{% endblock %}

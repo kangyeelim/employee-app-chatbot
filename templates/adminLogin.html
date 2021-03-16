@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <title>Jonathan</title>
+  <head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/adminDashboard.css" type="text/css">
+  </head>
+  <body>
+    <center style="color:#4169e1;">
+      <div style="background-color:white;">
+      <h1>
+        <img
+          id="chabotAvatar"
+          src=" {{ url_for('static', filename='avatar.png') }}"
+          alt="Jonathan"
+          style="width:50px;height:50px;"
+        />Jonathan Admin Console Login
+      </h1>
+      </div>
+    </center>
+    <div class="container">
+    <div class="card" id="form-card">
+      <form action="/admin" method="POST" id="form">
+        <div class="mb-3">
+          <label for="adminInputUsername" class="form-label">Admin Username</label>
+          <input type="text" class="form-control" id="adminInputUsername" name="adminInputUsername">
+        </div>
+        <div class="mb-3">
+          <label for="adminInputPassword" class="form-label">Admin Password</label>
+          <input type="password" class="form-control" id="adminInputPassword" name="adminInputPassword">
+        </div>
+        <button type="submit" class="btn btn-primary" style="background-color:#4169e1;">Submit</button>
+      </form>
+    </div>
+    </div>
+  </body>
+</html>
