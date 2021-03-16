@@ -11,7 +11,8 @@ Chatbot for workspace productivity for employee apps.
 * You would need to make sure python and pip is downloaded.
 * Download Git if on windows and git bash into the root project directory.
 * Also, this app works with MongoDB so to run it, make an account for MongoDB. Then create a project for this and create a database called 'chatbot-prototype-1' for this project.
-* Add 'processed_tweets.csv' files from Google Drive (https://drive.google.com/drive/folders/1jaNeITz1sszPDD9aS9gDdhDFrKnuPdUr?usp=sharing) under the directory /model for this project.
+* Add 'processed_tweets.csv' file from Google Drive (https://drive.google.com/drive/folders/1jaNeITz1sszPDD9aS9gDdhDFrKnuPdUr?usp=sharing) under the directory /model for this project.
+* Add 'variables.data-00000-of-00001' from Google Drive (https://drive.google.com/drive/folders/1-2vm55bQXoUXix5bxnONzuUmGLzNnlaY?usp=sharing) under the directory /model/Twitter-Sentiment-BiLSTM/variables/
 
 ## To connect to database
 * Create a file called .env
