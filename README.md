@@ -8,10 +8,14 @@ Chatbot for workspace productivity for employee apps.
 * Access the admin dashboard to retrain intent classification and sentiment analysis model
 
 ## Setup your own
-You would need to make sure python and pip is downloaded. To do the following commands, download Git if on windows and git bash into the root project directory. Also, this app works with MongoDB so to run it, make an account for MongoDB. Then create a project for this and create a database called 'chatbot-prototype-1' for this project. Add 'processed_tweets.csv' files from Google Drive (https://drive.google.com/drive/folders/1jaNeITz1sszPDD9aS9gDdhDFrKnuPdUr?usp=sharing) under the directory /model.
+* You would need to make sure python and pip is downloaded.
+* Download Git if on windows and git bash into the root project directory.
+* Also, this app works with MongoDB so to run it, make an account for MongoDB. Then create a project for this and create a database called 'chatbot-prototype-1' for this project.
+* Add 'processed_tweets.csv' files from Google Drive (https://drive.google.com/drive/folders/1jaNeITz1sszPDD9aS9gDdhDFrKnuPdUr?usp=sharing) under the directory /model for this project.
 
 ## To connect to database
-* Create a file called .env add MONGO_DB=<url> where <url> is the url from your project in MongoDB
+* Create a file called .env
+* Add MONGO_DB=<url> where <url> is the url from your project in MongoDB in .env
 * To get the <url>, go to project in MongoDB to see Clusters > press 'connect' > press 'Connect your application to your cluster using MongoDB native drivers' > use the url in that page
 
 ## Set up admin credentials
