@@ -8,14 +8,13 @@ Chatbot for workspace productivity for employee apps.
 * Access the admin dashboard to retrain intent classification and sentiment analysis model
 
 ## Setup your own
+You would need to make sure python and pip is downloaded. To do the following commands, download Git if on windows and git bash into the root project directory. Also, this app works with MongoDB so to run it, make an account for MongoDB. Then create a project for this and create a database called 'chatbot-prototype-1' for this project. Add 'processed_tweets.csv' files from Google Drive (https://drive.google.com/drive/folders/1jaNeITz1sszPDD9aS9gDdhDFrKnuPdUr?usp=sharing) under the directory /model.
 
-You would need to make sure python and pip is downloaded. To do the following commands, download Git if on windows and git bash into the root project directory. Also, this app works with MongoDB so to run it, make an account for MongoDB. Then create a project for this and create a database called 'chatbot-prototype-1' for this project. Add 'processed_tweets.csv' files from Google Drive (https://drive.google.com/drive/folders/1jaNeITz1sszPDD9aS9gDdhDFrKnuPdUr?usp=sharing) under the directory /model. 
-
-# To connect to database
+## To connect to database
 * Create a file called .env add MONGO_DB=<url> where <url> is the url from your project in MongoDB
 * To get the <url>, go to project in MongoDB to see Clusters > press 'connect' > press 'Connect your application to your cluster using MongoDB native drivers' > use the url in that page
 
-# Set up admin credentials
+## Set up admin credentials
 * Make a collection called 'users' and create an entry with the 'username' = <define your admin username>, 'password' = <define your admin password>, 'isAdmin' = true
 
 ```bash
@@ -75,14 +74,6 @@ Table "inputs"
 | sentiment  |   String        | null |		
 | created_at  |   Date        | not null |		
 
-Table "sessions"
-|Column |       Type         | Nullable |              Default              |
-|------|------------------|----------|-------------------------------------------|
-| _id    |                    | not null |  |
-| question| String           | not null |					null			   |
-| options  | Array          | not null |					null			   |
-| answer  | Number          | not null |					null			   |
-| timestamp  |           | not null |								   |
 
 Table "model_status"
 |Column |       Type         | Nullable |
