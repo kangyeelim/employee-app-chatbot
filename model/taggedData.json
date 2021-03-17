@@ -159,6 +159,11 @@
       "tag": "general.thanks",
       "patterns": [
         "Thanks",
+        "thanks",
+        "thanks a lot",
+        "thanks",
+        "thx",
+        "thx",
         "Thank you",
         "thanks to you",
         "That's helpful",
@@ -179,6 +184,8 @@
         "I am grateful",
         "thanks!",
         "thanks",
+        "thanks",
+        "thx",
         "thanks"
       ]
     },
@@ -399,7 +406,8 @@
         "Book meeting room for me",
         "Can help me book meeting room?",
         "book meeting room",
-        "i wanna book meeting room"
+        "i wanna book meeting room",
+        "could you help me book a meeting room"
       ]
     },
     {
@@ -424,9 +432,15 @@
         "Alright",
         "Confirmed",
         "confirm",
+        "confirm",
+        "agreed",
+        "go ahead",
+        "yes",
         "Agreed",
         "Do it",
         "okkk",
+        "yes",
+        "yes",
         "yes",
         "ok",
         "agree",
@@ -454,6 +468,7 @@
       "tag": "general.rejection",
       "patterns": [
         "No",
+        "Noooo",
         "I would not like to",
         "No please",
         "No Pls",
@@ -461,9 +476,13 @@
         "I do not want to",
         "no thanks",
         "nevermind",
+        "never mind",
+        "forget it",
+        "no",
         "forget it",
         "I don't wanna",
         "No",
+        "no",
         "Not Confirm",
         "not confirmed",
         "Never mind",
@@ -492,7 +511,15 @@
         "no",
         "no",
         "no",
-        "note"
+        "no",
+        "no",
+        "nope",
+        "nope",
+        "no stop",
+        "hell no",
+        "stop it",
+        "no",
+        "no"
       ]
     },
     {
@@ -923,7 +950,11 @@
         "26/2/21 1.5hr",
         "tower b #02-03",
         "1pm 3/3/21 2hrs",
-        "23/3/21 2hr"
+        "23/3/21 2hr",
+        "today",
+        "tomorrow",
+        "tmr",
+        "today"
       ]
     },
     {
